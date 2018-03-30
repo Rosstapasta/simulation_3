@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 import './comps.css';
 import Navbar from './navbar';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { getFriends } from '../ducks/reducer';
 
-export default class Search extends Component{
+class Search extends Component{
     constructor(){
         super()
 
         this.state = {
-            view: 'Search'
+            view: 'Search',
+            users: []
         }
     }
 
+    componentWillMout(){
+        axios.get('/getallusers').then(
+            res => this.setState({users: res.data})
+        )
+        this.props.getFriends()
+    }
+
     render(){
+
+        
         return (
             <div>
                 <Navbar>{this.state.view}</Navbar>
@@ -44,3 +57,5 @@ export default class Search extends Component{
         )
     }
 }
+
+export default connect(state => state, {getFriends})(Search)

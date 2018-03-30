@@ -79,8 +79,8 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 }))
 
 
-app.get('/getusers', (req, res, next) => {
-    app.get('db').get_all_users(req.user.id).then(
+app.get('/getnotfriends', (req, res, next) => {
+    app.get('db').get_not_friends(req.user.id).then(
         users => res.status(200).send(users)
         
     )
@@ -92,6 +92,22 @@ app.get('/getoneuser', (req, res, next) => {
         user => res.status(200).send(user)
     )
 })
+
+app.post('/newfriend', (req, res, next) => {
+    const { val } = req.body;
+    console.log(val, "val")
+    app.get('db').make_friend(req.user.id, val).then(
+        data => res.status(200).send(data)
+    )
+})
+
+app.put('/updateuser', (req, res, next) => {
+    const { firstName, lastName, gender, hairColor, eyeColor, hobby, birthDay, birthMonth, birthYear } = req.body;
+
+ app.get('db').update_user(req.user.id, firstName, lastName, gender, hairColor, eyeColor, hobby, birthDay, birthMonth, birthYear ).then( user => res.status(200).send(user))
+})
+
+
 
 // app.get('/friendvalues', (req, res, next) => {
 //     app.get('db').friend_values(req.user.id).then(

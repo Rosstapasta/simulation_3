@@ -19,11 +19,12 @@ class Dashboard extends Component{
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.makeFriend = this.makeFriend.bind(this);
     }
 
     componentWillMount(){
         this.props.getUser();
-        axios.get('/getusers').then( res => {
+        axios.get('/getnotfriends').then( res => {
             this.setState({users: res.data});
         })
     }
@@ -33,31 +34,42 @@ class Dashboard extends Component{
         console.log(this.state.value)
     }
 
+    makeFriend(val){
+        console.log(val, "val")
+        axios.post('/newfriend', { val } ).then( res => {
+            axios.get('/getnotfriends').then( res => {
+                this.setState({users: res.data});
+            })
+        })
+    }
+
     render(){
         console.log(this.props.user, this.state.users, "props..user")
+
         const { user } = this.props;
         const { value, users } = this.state;
 
         if(user[0]){
-        var filterRec = this.state.users.filter( people => people[value] === user[0][value],  console.log(user[0][value], "infilter"))
-        
-        var friendBoxes = filterRec.map( (people, i) => {
-            return (
-                <div key={i} className="friendBox">
 
-                    <img width="100px" src={people.img}/>
+            var filterRec = this.state.users.filter( people => people[value] === user[0][value],  console.log(user[0][value], "infilter"))
+            
+            var friendBoxes = filterRec.map( (people, i) => {
+                return (
+                    <div key={i} className="friendBox">
 
-                    <div className="friendBox_name">
-                        <span>{people.first_name}</span>
-                        <span>{people.last_name}</span>
+                        <img width="100px" src={people.img} alt="not found"/>
+
+                        <div className="friendBox_name">
+                            <span>{people.first_name}</span>
+                            <span>{people.last_name}</span>
+                        </div>
+
+                        <button className="friendBox_button" onClick={() => this.makeFriend(people.id)}>add friend</button>
+
                     </div>
-
-                    <button className="friendBox_button">add friend</button>
-
-                </div>
-            )
-        })
-    }
+                )
+            })
+        }
 
         return (
             <div>
