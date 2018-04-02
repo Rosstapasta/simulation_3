@@ -101,8 +101,8 @@ app.put('/updateuser', (req, res, next) => {
 })
 
 app.get('/getallusers', (req, res, next) => {
-    const {value} = req.query;
-    app.get('db').get_all_users(req.user.id, value ).then(
+    const {value, limit} = req.query;
+    app.get('db').get_all_users(req.user.id, value, limit ).then(
      users => 
         
      res.status(200).send(users)

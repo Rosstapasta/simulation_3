@@ -19,7 +19,8 @@ export default class Search extends Component{
             dbCount: 0,
             pagesTotal: 0,
             pageArray: [],
-            pagedisplayed: 1
+            pagedisplayed: 1,
+            limit: 20
         }
 
         this.makeFriend = this.makeFriend.bind(this);
@@ -53,7 +54,7 @@ export default class Search extends Component{
             )
         })
 
-        axios.get(`/getallusers?value=${this.state.offSetVal}`).then(
+        axios.get(`/getallusers?value=${this.state.offSetVal}&limit=${this.state.limit}`).then(
             res => 
             this.setState({users2: res.data}, 
             
@@ -107,10 +108,16 @@ export default class Search extends Component{
     }
 
     searchButton(){
+        this.setState({limit: this.state.dbCount, offSetVal: 0},
+        () => this.componentGet()
+        )
         this.setState({filterSwitch: true })
     }
 
     resetButton(){
+        this.setState({limit: 20, offSetVal: 0, filter: ''},
+        () => this.componentGet()
+        )
         this.setState({filterSwitch: false})
     }
 
@@ -122,14 +129,16 @@ export default class Search extends Component{
 
 
     render(){
-        
-        var pages = this.state.pageArray.map( (page, i) => {
-            return (
-                <div key={i} className="pageBox">
-                    {page.pagenumber === this.state.pagedisplayed ? <div>{<button className='currentPage'>page {page.pagenumber}</button>}</div> : <button className='otherPage' onClick={() => this.changePage(page)}>{page.pagenumber}</button>}
-                </div>
-            )
-        })
+
+        if(!this.state.filterSwitch){
+            var pages = this.state.pageArray.map( (page, i) => {
+                return (
+                    <div key={i} className="pageBox">
+                        {page.pagenumber === this.state.pagedisplayed ? <div>{<button className='currentPage'>page {page.pagenumber}</button>}</div> : <button className='otherPage' onClick={() => this.changePage(page)}>{page.pagenumber}</button>}
+                    </div>
+                )
+            })
+        }
 
         var filterRec = [];
         if(this.state.filterSwitch){
@@ -169,7 +178,7 @@ export default class Search extends Component{
                                 <option value='last_name'>Last Name</option>
                             </select>
 
-                            <input className="search_input" onChange={(e) => this.handleChange(e.target.value)}/>
+                            <input value={this.state.filter} className="search_input" onChange={(e) => this.handleChange(e.target.value)}/>
                                 
                             <button id="blackbutton" className="search_button" onClick={ this.searchButton}>Search</button>
 

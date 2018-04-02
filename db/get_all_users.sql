@@ -1,3 +1,3 @@
 select * from helo
 where id != ($1)
-limit 20 offset ($2);
+limit ($3) offset ($2);
