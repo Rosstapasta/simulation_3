@@ -4,7 +4,10 @@ import home from './assets/home.png';
 import search from './assets/search.png';
 import { Link } from 'react-router-dom';
 
+
 export default function Navbar(props){
+    
+   
     
         return (
             <div className="nav_body">
@@ -22,7 +25,7 @@ export default function Navbar(props){
                 </div>
 
                 <div className="nav2">
-                    <Link to="/" style={{textDecoration: 'none', color: 'white'}}><p>Logout</p></Link>
+                    <a href='http://localhost:3030/auth/logout' style={{textDecoration: 'none', color: 'white'}}><p>Logout</p></a>
                 </div>
 
             </div>

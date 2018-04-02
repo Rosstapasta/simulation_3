@@ -1,6 +1,3 @@
--- select * from helo
--- right join helo_friends
--- on helo.id = helo_friends.user_id
--- where helo.id = 12;
-
-select * from helo;
+select * from helo
+where id != ($1)
+limit 20 offset ($2);

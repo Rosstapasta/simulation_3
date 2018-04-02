@@ -11,7 +11,6 @@ const GET_FRIENDS = 'GET_FRIENDS';
 
 export default function reducer( state = initialState, action){
         let { payload } = action;
-        // console.log(payload, "payload")
     switch( action.type ){
 
         case GET_USER + '_FULFILLED':
@@ -32,7 +31,6 @@ export function getUser(){
         )
     }
 }
-
 
 export function getFriends(){
     return {

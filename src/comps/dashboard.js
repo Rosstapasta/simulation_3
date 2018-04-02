@@ -31,11 +31,9 @@ class Dashboard extends Component{
 
     handleChange(e){
         this.setState({value: e.target.value});
-        console.log(this.state.value)
     }
 
     makeFriend(val){
-        console.log(val, "val")
         axios.post('/newfriend', { val } ).then( res => {
             axios.get('/getnotfriends').then( res => {
                 this.setState({users: res.data});
@@ -44,14 +42,12 @@ class Dashboard extends Component{
     }
 
     render(){
-        console.log(this.props.user, this.state.users, "props..user")
-
         const { user } = this.props;
-        const { value, users } = this.state;
+        const { value } = this.state;
 
         if(user[0]){
 
-            var filterRec = this.state.users.filter( people => people[value] === user[0][value],  console.log(user[0][value], "infilter"))
+            var filterRec = this.state.users.filter( people => people[value] === user[0][value] && people.id !== user[0].id)
             
             var friendBoxes = filterRec.map( (people, i) => {
                 return (

@@ -47,25 +47,20 @@ passport.use( new Auth0Strategy({
         if(!users[0]){
             db.create_user([profile.id]).then( res => {
                 done(null, res[0].id);
-                // console.log(res, "registered")
             })
         }else {
             done(null, users[0].id)
-            // console.log(users, "sign in")
         }
     })
 }))
 
 passport.serializeUser( (id, done) => {
     done(null, id)
-    // console.log(id, 'from serializeuser')
 })
 
 passport.deserializeUser( (id, done) => {
-    // console.log(id, "first deserialized")
     app.get('db').find_session_user([id]).then(user => {
         done(null, user[0]);
-        // console.log(user[0], 'from deserialized')
     })
 })
 
@@ -79,15 +74,14 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 }))
 
 
+
 app.get('/getnotfriends', (req, res, next) => {
     app.get('db').get_not_friends(req.user.id).then(
-        users => res.status(200).send(users)
-        
+        users => res.status(200).send(users)     
     )
 })
 
 app.get('/getoneuser', (req, res, next) => {
-    // console.log(req.user.id, "id off get user from getuser endpoint")
     app.get('db').get_user(req.user.id).then(
         user => res.status(200).send(user)
     )
@@ -95,7 +89,6 @@ app.get('/getoneuser', (req, res, next) => {
 
 app.post('/newfriend', (req, res, next) => {
     const { val } = req.body;
-    console.log(val, "val")
     app.get('db').make_friend(req.user.id, val).then(
         data => res.status(200).send(data)
     )
@@ -107,13 +100,38 @@ app.put('/updateuser', (req, res, next) => {
  app.get('db').update_user(req.user.id, firstName, lastName, gender, hairColor, eyeColor, hobby, birthDay, birthMonth, birthYear ).then( user => res.status(200).send(user))
 })
 
+app.get('/getallusers', (req, res, next) => {
+    const {value} = req.query;
+    app.get('db').get_all_users(req.user.id, value ).then(
+     users => 
+        
+     res.status(200).send(users)
+    )
+})
 
 
-// app.get('/friendvalues', (req, res, next) => {
-//     app.get('db').friend_values(req.user.id).then(
-//         friends => res.status(200).send(friends)
-//     )
-// })
+app.get('/friendvalues', (req, res, next) => {
+    app.get('db').friend_values(req.user.id).then(
+        friends => res.status(200).send(friends)  
+    )
+})
+
+app.post('/unfriend', (req, res, next) => {
+    const {val} = req.body;
+    app.get('db').unfriend(req.user.id, val).then( resp =>
+        res.status(200).send(resp)
+    )
+})
+
+
+app.get('/getusercount', (req, res, next) => {
+    app.get('db').getCount(req.user.id).then( resp => res.status(200).send(resp))
+})
+
+app.get('/auth/logout', (req,res) => {
+    req.logOut();
+    res.redirect('http://localhost:3000/')
+})
 
 
 app.listen(SERVER_PORT, () => console.log(`listening on port: ${SERVER_PORT}`) )

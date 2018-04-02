@@ -247,6 +247,7 @@
     background-image: radial-gradient(circle at 50% -46%,#ff9770,#ff7a6e);
 }
 
+
 /* search elements */
 
 .searchmiddle{
@@ -254,8 +255,11 @@
     border-radius: 2px;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.2);
     width: 841px;
+    height: auto;
+    margin-bottom: 30px;
     flex-direction: column;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
+    min-height: 700px;
 }
 
 .search_top{
@@ -300,11 +304,12 @@
     height: auto;
     width: 100%;
     display: flex;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: 20px;
     box-sizing: border-box;
 }
+
+
 
 /* profile elements */
 
@@ -390,4 +395,63 @@
 
 .sortText{
     margin-right: 8px;
+}
+
+.pageFlipThing{
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.pageFlipChild{
+    background-image: linear-gradient(97deg,#ff7a6e,#ff9770);
+    width: 80%;
+    height: 100%;
+    border-radius: 2px;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pageBox{
+
+}
+
+.currentPage{
+    height: 25px;
+    background-color: #000!important;
+    width: 75px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    border: 2px solid black;
+
+}
+
+.otherPage{
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.2);
+    margin: 5px;
+    transition: 0.5s;
+    border: white;
+    cursor: pointer;
+
+}
+
+.otherPage:hover{
+    background-color: black;
+    color: white;
+    border: black;
 }

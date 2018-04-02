@@ -32,7 +32,6 @@ class Profile extends Component{
     }
 
     componentDidMount(){
-        // this.props.getUser();
         axios.get('/getoneuser').then(
             user => this.setState({
                 firstName: user.data[0].first_name || '',
@@ -54,7 +53,6 @@ class Profile extends Component{
 
     handleChange(val, val2){
         this.setState({[val2]: val})
-        console.log(this.state.gender, 'gender')
     }
 
     cancelUpdates(){
@@ -97,7 +95,6 @@ class Profile extends Component{
     }
 
     render(){
-        console.log(this.state)
         return (
             <div>
                 <Navbar>{this.state.view}</Navbar>
@@ -256,9 +253,7 @@ class Profile extends Component{
                                 </select>
 
                             </div>
-
                         </div>
-
                     </div>
                 </div>
                 </div>

@@ -12,24 +12,59 @@ CREATE TABLE IF NOT EXISTS helo_friends
 INSERT INTO helo
 (first_name, last_name, gender, hair_color, eye_color,
 hobby, bday, bmonth, byear, img)
-VALUES ('bill', 'smittysomethin', 'male', 'brown', 'green', 'fishing', '23', 'March', 1999, null);
+VALUES ('bill', 'smittysomethin', 'female', 'Blue', 'Brown', 'Hiking', '23', 'March', 1999, '
+https://robohash.org/eric');
 
 INSERT INTO helo
 (first_name, last_name, gender, hair_color, eye_color,
 hobby, bday, bmonth, byear, img)
-VALUES ('eric', 'smittysomethin', 'male', 'brown', 'green', 'fishing', '23', 'March', 1999, null);
+VALUES ('eric', 'smittysomethin', 'female', 'Green', 'Brown', 'Hiking', '23', 'May', 1999, '
+https://robohash.org/sdfw');
 
 INSERT INTO helo
 (first_name, last_name, gender, hair_color, eye_color,
 hobby, bday, bmonth, byear, img)
-VALUES ('dude', 'smittysomethin', 'male', 'brown', 'green', 'fishing', '23', 'March', 1999, null);
+VALUES ('dude', 'smittysomethin', 'female', 'Red', 'Blue', 'Video Games', '23', 'May', 1999, '
+https://robohash.org/joey');
 
 INSERT INTO helo
 (first_name, last_name, gender, hair_color, eye_color,
 hobby, bday, bmonth, byear, img)
-VALUES ('sarah', 'smittysomethin', 'female', 'brown', 'green', 'fishing', '23', 'March', 1999, null);
+VALUES ('sarah', 'smittysomethin', 'female', 'Blue', 'Green', 'Video Games', '23', 'May', 1999, '
+https://robohash.org/sammy');
 
 INSERT INTO helo
 (first_name, last_name, gender, hair_color, eye_color,
 hobby, bday, bmonth, byear, img)
-VALUES ('jen', 'smittysomethin', 'female', 'brown', 'green', 'fishing', '23', 'March', 1999, null);
+VALUES ('jen', 'smittysomethin', 'female', 'Red', 'Green', 'Fishing', '23', 'March', 1999, '
+https://robohash.org/jen');
+
+INSERT INTO helo
+(first_name, last_name, gender, hair_color, eye_color,
+hobby, bday, bmonth, byear, img)
+VALUES ('bill', 'smittysomethin', 'female', 'Blue', 'Brown', 'Hiking', '23', 'March', 1999, '
+https://robohash.org/jnwfe');
+
+INSERT INTO helo
+(first_name, last_name, gender, hair_color, eye_color,
+hobby, bday, bmonth, byear, img)
+VALUES ('eric', 'smittysomethin', 'female', 'Green', 'Brown', 'Hiking', '23', 'May', 1999, '
+https://robohash.org/mcneyv63');
+
+INSERT INTO helo
+(first_name, last_name, gender, hair_color, eye_color,
+hobby, bday, bmonth, byear, img)
+VALUES ('dude', 'smittysomethin', 'female', 'Red', 'Blue', 'Video Games', '23', 'May', 1999, '
+https://robohash.org/ericinev67');
+
+INSERT INTO helo
+(first_name, last_name, gender, hair_color, eye_color,
+hobby, bday, bmonth, byear, img)
+VALUES ('sarah', 'smittysomethin', 'female', 'Blue', 'Green', 'Video Games', '23', 'May', 1999, '
+https://robohash.org/ericwfeu9');
+
+INSERT INTO helo
+(first_name, last_name, gender, hair_color, eye_color,
+hobby, bday, bmonth, byear, img)
+VALUES ('jen', 'smittysomethin', 'female', 'Red', 'Green', 'Fishing', '23', 'March', 1999, '
+https://robohash.org/eric3injef');
