@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './comps.css';
 import Navbar from './navbar';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { getUser } from '../ducks/reducer';
 
-export default class Search extends Component{
+class Search extends Component{
     constructor(props){
         super(props)
 
@@ -56,8 +58,7 @@ export default class Search extends Component{
 
         axios.get(`/getallusers?value=${this.state.offSetVal}&limit=${this.state.limit}`).then(
             res => 
-            this.setState({users2: res.data}, 
-            
+            this.setState({users2: res.data},          
                () => axios.get('/friendvalues').then(
                     res => { 
                       
@@ -84,6 +85,8 @@ export default class Search extends Component{
     }
 
     componentWillMount(){
+        const { history } = this.props;
+        this.props.getUser(history);
         this.componentGet()
     }
 
@@ -199,9 +202,13 @@ export default class Search extends Component{
                             </div>
 
                         </div>
+
                     </div>
                 </div>
+                
             </div>
         )
     }
 }
+
+export default connect(state => state, { getUser })(Search)

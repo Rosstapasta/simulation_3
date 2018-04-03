@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './comps.css';
 import Navbar from './navbar';
-// import { getUser } from '../ducks/reducer';
 import { connect } from 'react-redux';
+import { getUser } from '../ducks/reducer';
 import axios from 'axios';
 
 class Profile extends Component{
@@ -13,13 +13,13 @@ class Profile extends Component{
             view: 'Profile',
             firstName: '',
             lastName: '',
-            gender: '',
-            hairColor: '',
-            eyeColor: '',
-            hobby: '',
-            birthDay: 0,
-            birthMonth: '',
-            birthYear: 0,
+            gender: 'male',
+            hairColor: 'Brown',
+            eyeColor: 'Brown',
+            hobby: 'Video Games',
+            birthDay: 1,
+            birthMonth: 'January',
+            birthYear: 2018,
             firstNameTitle: '',
             lastNameTitle: '',
             picture: '',
@@ -32,6 +32,8 @@ class Profile extends Component{
     }
 
     componentDidMount(){
+        const {history} = this.props;
+        this.props.getUser(history);
         axios.get('/getoneuser').then(
             user => this.setState({
                 firstName: user.data[0].first_name || '',
@@ -262,4 +264,4 @@ class Profile extends Component{
     }
 }
 
-export default connect(state => state)(Profile)
+export default connect(state => state, {getUser})(Profile)

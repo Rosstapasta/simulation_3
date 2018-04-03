@@ -23,7 +23,8 @@ class Dashboard extends Component{
     }
 
     componentWillMount(){
-        this.props.getUser();
+        const {history} = this.props;
+        this.props.getUser(history);
         axios.get('/getnotfriends').then( res => {
             this.setState({users: res.data});
         })

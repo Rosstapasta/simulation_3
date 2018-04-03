@@ -67,24 +67,29 @@ passport.deserializeUser( (id, done) => {
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/auth/callback', passport.authenticate('auth0', {
     
-    //changed successredirect from 3030 to 3000 might have to change back when run build
+    //changed redirect from 3030 to 3000 might have to change back when run build
     successRedirect: 'http://localhost:3000/#/dashboard/',
-    failureRedirect: 'http://localhost:3000/'
+    failureRedirect: 'http://localhost:3000/#/'
 
 }))
 
 
 
 app.get('/getnotfriends', (req, res, next) => {
-    app.get('db').get_not_friends(req.user.id).then(
-        users => res.status(200).send(users)     
-    )
+
+    if(req.user){
+        app.get('db').get_not_friends(req.user.id).then(
+            users => res.status(200).send(users)     
+        )
+    }
 })
 
 app.get('/getoneuser', (req, res, next) => {
-    app.get('db').get_user(req.user.id).then(
-        user => res.status(200).send(user)
-    )
+        if(req.user){
+              res.status(200).send([req.user])
+        }else{
+            res.status(200).send([{id: 0}])
+        }
 })
 
 app.post('/newfriend', (req, res, next) => {
@@ -104,7 +109,6 @@ app.get('/getallusers', (req, res, next) => {
     const {value, limit} = req.query;
     app.get('db').get_all_users(req.user.id, value, limit ).then(
      users => 
-        
      res.status(200).send(users)
     )
 })

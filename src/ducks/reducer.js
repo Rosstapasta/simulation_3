@@ -23,11 +23,18 @@ export default function reducer( state = initialState, action){
     }
 }
 
-export function getUser(){
+export function getUser(history){
     return {
         type: GET_USER,
         payload: axios.get('/getoneuser').then(
-            res => { return res.data }
+            res => {
+                console.log(res.data, 'res.data');
+                if(res.data[0].id !== 0){
+                    return res.data
+                }else{
+                   return history.push('/')
+                }
+            }
         )
     }
 }
